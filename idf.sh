@@ -33,9 +33,9 @@ case "$command" in
     ;;
   flash)
     #This command is copied from idf build commnad
-    #"idf.py -p (PORT) flash" doesn't work...
-    cmd="/opt/esp/python_env/idf4.4_py3.8_env/bin/python ../opt/esp/idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB0 -b 500000 --before default_reset --after hard_reset --chip esp32  write_flash --flash_mode dio --flash_size detect --flash_freq 80m 0x1000 build/bootloader/bootloader.bin 0x10000 build/partition_table/partition-table.bin 0x20000 build/intdash-esp-camera.bin"
-    docker run --rm --device=$HOST_USBDEV:/dev/ttyUSB0 -v $PWD/$TARGET_PROJECT:/project -w /project -e HOME=/tmp --entrypoint="" $BUILD_CONTAINER bash -c "$cmd"
+    # python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 40m 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin 0x10000 build/hello_world.bin
+    cmd="idf.py flash"
+    docker run --rm --device=$HOST_USBDEV:/dev/ttyUSB0 -v $PWD/$TARGET_PROJECT:/project -w /project -e HOME=/tmp $BUILD_CONTAINER bash -c "$cmd"
     ;;
   monitor)
     docker run -it --rm --device=$HOST_USBDEV:/dev/ttyUSB0 -v $PWD/$TARGET_PROJECT:/project -w /project -e HOME=/tmp $BUILD_CONTAINER idf.py monitor
