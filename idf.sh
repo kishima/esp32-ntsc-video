@@ -12,7 +12,7 @@ ESP_TARGET=esp32
 
 case "$command" in
   build_container)
-    docker build -t $BUILD_CONTAINER -f build.dockerfile .
+    docker build --build-arg IDF_VER=$IDF_VER -t $BUILD_CONTAINER -f build.dockerfile .
     ;;
   set-target)
     docker run -it --rm -v $PWD/$TARGET_PROJECT:/project -w /project -u $(id -u $USER):$(id -g $USER) -e HOME=/tmp $BUILD_CONTAINER idf.py set-target $ESP_TARGET

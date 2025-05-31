@@ -1,5 +1,5 @@
-#FROM espressif/idf:v5.3.3
-FROM espressif/idf:v5.4.1
+ARG IDF_VER
+FROM espressif/idf:$IDF_VER
 
 ENV DEBIAN_FRONTEND=noninteractive
 
