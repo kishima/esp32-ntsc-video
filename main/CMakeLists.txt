@@ -1,2 +1,2 @@
-idf_component_register(SRCS "hello_world_main.cpp"
+idf_component_register(SRCS "ntsc_demo.cpp" 
                     INCLUDE_DIRS "")
